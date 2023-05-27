@@ -2,10 +2,13 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
+  background-color: #f5f5f5;
 }
 
 h1 {
   text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 #person-list {
@@ -23,8 +26,10 @@ li {
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  animation: fade-in 0.3s ease-in-out;
 }
 
 li button {
@@ -34,4 +39,15 @@ li button {
   padding: 5px 10px;
   border-radius: 3px;
   cursor: pointer;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

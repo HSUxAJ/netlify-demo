@@ -7,7 +7,10 @@ function createPerson(name) {
   const deleteBtn = document.createElement('button');
   deleteBtn.innerText = '刪除';
   deleteBtn.addEventListener('click', () => {
-    li.remove();
+    li.classList.add('fade-out');
+    setTimeout(() => {
+      li.remove();
+    }, 300);
   });
 
   li.appendChild(deleteBtn);
