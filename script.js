@@ -1,3 +1,23 @@
+const list = document.getElementById('list');
+const input = document.getElementById('person-input');
+// const addButton = document.getElementById('add-btn');
+
+// 初始化 Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDHP_6Try_QBQri-25_WGUegQn2GiLDxt0",
+  authDomain: "line-bot-c9ed0.firebaseapp.com",
+  projectId: "line-bot-c9ed0",
+  storageBucket: "line-bot-c9ed0.appspot.com",
+  messagingSenderId: "880021780854",
+  appId: "1:880021780854:web:852f894d6e674fbe70e257",
+  measurementId: "G-216V2TNXZ4"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// 取得 Firestore 的實例
+const firestore = firebase.firestore();
+
 function createPerson(name) {
   const li = document.createElement('li');
   li.innerText = name;
@@ -20,23 +40,20 @@ function showConfirmationDialog(name, li) {
   }
 }
 
-// function addPerson() {
-//   const name = input.value.trim();
+const personNames = [];
 
-//   if (name !== '') {
-//     createPerson(name);
-//     input.value = '';
-//     input.focus();
-//   }
-// }
+// Retrieve data from Firestore
+firestore.collection("Tourist_Guide").get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    var data = doc.data();
+    personNames.push(data.name);
+    // console.log(data.name);
+  });
 
-// addButton.addEventListener('click', addPerson);
-// input.addEventListener('keydown', (event) => {
-//   if (event.key === 'Enter') {
-//     addPerson();
-//   }
-// });
+  // Further operations relying on personNames can be performed here
+  console.log(personNames);
+  personNames.forEach(name => createPerson(name));
+}).catch((error) => {
+  console.log("Error fetching collection:", error);
+});
 
-const personNames = ['小明', '小華', '小李'];
-
-personNames.forEach(name => createPerson(name));
