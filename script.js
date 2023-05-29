@@ -60,3 +60,29 @@ firestore.collection("Tourist_Guide").get().then((querySnapshot) => {
 }).catch((error) => {
   console.log("Error fetching collection:", error);
 });
+
+
+
+// 初始化 LINE JavaScript SDK
+liff.init({ liffId: LIFF_ID })
+  .then(() => {
+    // 使用 liff.getProfile() 取得使用者資訊
+    return liff.getProfile();
+  })
+  .then((profile) => {
+    // 獲取使用者資訊
+    const userId = profile.userId;
+    const displayName = profile.displayName;
+    const userPhoto = profile.pictureUrl;
+    const userLanguage = profile.language;
+
+    // 在此處對使用者資訊進行處理或顯示
+    console.log('User ID:', userId);
+    console.log('Display Name:', displayName);
+    console.log('User Photo:', userPhoto);
+    console.log('User Language:', userLanguage);
+  })
+  .catch((error) => {
+    // 處理錯誤
+    console.error('Error:', error);
+  });
